@@ -32,5 +32,3 @@ end             { return END;                               }
 .               { yyerror("INVALID INPUT.");                }
 
 %%
-
-

@@ -1640,9 +1640,6 @@ yyreturn:
 #line 108 "zoomjoystrong.y"
 
 
-// Epilogue
-
-
 /***********************************************************************
     Error reporting function for parsing or syntax errors within the 
     language.

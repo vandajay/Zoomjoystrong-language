@@ -1,5 +1,5 @@
 /***********************************************************************
-    Zoomjoystrong Programming Language
+    Zoomjoystrong Programming Language: Parser
 
     This is a parser written in bison that defines the grammar for the
     Zoomjoystrong language of the lexemes passed from the lexer.
@@ -39,10 +39,10 @@
 %token RECTANGLE
 %token SET_COLOR
 
-%token INT
 %type<iVal> INT
-%token FLOAT
+%token INT
 %type<fVal> FLOAT
+%token FLOAT
 
 %%
 
@@ -106,9 +106,6 @@ statement       :   POINT INT INT END_STATEMENT {
                 ;
 
 %%
-
-// Epilogue
-
 
 /***********************************************************************
     Error reporting function for parsing or syntax errors within the 
