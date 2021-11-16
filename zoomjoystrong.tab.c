@@ -92,15 +92,18 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "zoomjoystrong.y"
+#line 11 "zoomjoystrong.y"
+ // C declarations
 
-	#include <stdio.h>
-  #include <stdlib.h>
-  #include <math.h>
-  #include "zoomjoystrong.tab.h"
-  #include "zoomjoystrong.h"
-  int yyerror(const char*);
-  int yylex();
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <math.h>
+    #include "zoomjoystrong.tab.h"
+    #include "zoomjoystrong.h"
+    int yyerror(const char*);
+    int yylex();
+    extern int yylineno;
 
 
 /* Enabling traces.  */
@@ -123,14 +126,14 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "zoomjoystrong.y"
-{
-	int iVal;
-  float fVal;
-	char* sVal;
+#line 25 "zoomjoystrong.y"
+{ // %union define lexeme types passed from lexer to parser
+    int iVal;
+    float fVal;
+    char* sVal;
 }
 /* Line 193 of yacc.c.  */
-#line 134 "zoomjoystrong.tab.c"
+#line 137 "zoomjoystrong.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -143,7 +146,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 147 "zoomjoystrong.tab.c"
+#line 150 "zoomjoystrong.tab.c"
 
 #ifdef short
 # undef short
@@ -430,8 +433,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    33,    33,    36,    37,    40,    41,    42,    43,    44,
-      45
+       0,    51,    51,    54,    55,    58,    66,    76,    86,    96,
+     105
 };
 #endif
 
@@ -1347,38 +1350,80 @@ yyreduce:
   switch (yyn)
     {
         case 5:
-#line 40 "zoomjoystrong.y"
-    {point((yyvsp[(2) - (4)].iVal),(yyvsp[(3) - (4)].iVal));;}
+#line 58 "zoomjoystrong.y"
+    {
+                        if( (yyvsp[(2) - (4)].iVal) >= 0 && (yyvsp[(2) - (4)].iVal) <= WIDTH &&
+                            (yyvsp[(3) - (4)].iVal) >= 0 && (yyvsp[(3) - (4)].iVal) <= HEIGHT) {
+                            point((yyvsp[(2) - (4)].iVal),(yyvsp[(3) - (4)].iVal));
+                        } else {
+                            yyerror("INVALID POINT!");
+                        }
+                    ;}
     break;
 
   case 6:
-#line 41 "zoomjoystrong.y"
-    {line((yyvsp[(2) - (6)].iVal),(yyvsp[(3) - (6)].iVal),(yyvsp[(4) - (6)].iVal),(yyvsp[(5) - (6)].iVal));;}
+#line 66 "zoomjoystrong.y"
+    {
+                        if( (yyvsp[(2) - (6)].iVal) >= 0 && (yyvsp[(2) - (6)].iVal) <= WIDTH &&
+                            (yyvsp[(3) - (6)].iVal) >= 0 && (yyvsp[(3) - (6)].iVal) <= HEIGHT &&
+                            (yyvsp[(4) - (6)].iVal) >= 0 && (yyvsp[(4) - (6)].iVal) <= WIDTH &&
+                            (yyvsp[(5) - (6)].iVal) >= 0 && (yyvsp[(5) - (6)].iVal) <= HEIGHT) {
+                            line((yyvsp[(2) - (6)].iVal),(yyvsp[(3) - (6)].iVal),(yyvsp[(4) - (6)].iVal),(yyvsp[(5) - (6)].iVal));
+                        } else {
+                            yyerror("INVALID LINE!");
+                        }
+                    ;}
     break;
 
   case 7:
-#line 42 "zoomjoystrong.y"
-    {circle((yyvsp[(2) - (5)].iVal),(yyvsp[(3) - (5)].iVal),(yyvsp[(4) - (5)].iVal));;}
+#line 76 "zoomjoystrong.y"
+    {
+                        if( (yyvsp[(2) - (5)].iVal) >= 0 && (yyvsp[(2) - (5)].iVal) <= WIDTH &&
+                            (yyvsp[(3) - (5)].iVal) >= 0 && (yyvsp[(3) - (5)].iVal) <= HEIGHT &&
+                            (yyvsp[(4) - (5)].iVal) >= 0 && (yyvsp[(4) - (5)].iVal) <= WIDTH &&
+                            (yyvsp[(4) - (5)].iVal) >= 0 && (yyvsp[(4) - (5)].iVal) <= HEIGHT) {
+                            circle((yyvsp[(2) - (5)].iVal),(yyvsp[(3) - (5)].iVal),(yyvsp[(4) - (5)].iVal));
+                        } else {
+                            yyerror("INVALID CIRCLE!");
+                        }
+                    ;}
     break;
 
   case 8:
-#line 43 "zoomjoystrong.y"
-    {rectangle((yyvsp[(2) - (6)].iVal),(yyvsp[(3) - (6)].iVal),(yyvsp[(4) - (6)].iVal),(yyvsp[(5) - (6)].iVal));;}
+#line 86 "zoomjoystrong.y"
+    {
+                        if( (yyvsp[(2) - (6)].iVal) >= 0 && (yyvsp[(2) - (6)].iVal) <= WIDTH &&
+                            (yyvsp[(3) - (6)].iVal) >= 0 && (yyvsp[(3) - (6)].iVal) <= HEIGHT &&
+                            (yyvsp[(4) - (6)].iVal) >= 0 && (yyvsp[(4) - (6)].iVal) <= WIDTH &&
+                            (yyvsp[(5) - (6)].iVal) >= 0 && (yyvsp[(5) - (6)].iVal) <= HEIGHT) {
+                            rectangle((yyvsp[(2) - (6)].iVal),(yyvsp[(3) - (6)].iVal),(yyvsp[(4) - (6)].iVal),(yyvsp[(5) - (6)].iVal));
+                        } else {
+                            yyerror("INVALID RECTANGLE!");
+                        }
+                    ;}
     break;
 
   case 9:
-#line 44 "zoomjoystrong.y"
-    {set_color((yyvsp[(2) - (5)].iVal),(yyvsp[(3) - (5)].iVal),(yyvsp[(4) - (5)].iVal));;}
+#line 96 "zoomjoystrong.y"
+    {
+                        if( (yyvsp[(2) - (5)].iVal) >= 0 && (yyvsp[(2) - (5)].iVal) <= 255 &&
+                            (yyvsp[(3) - (5)].iVal) >= 0 && (yyvsp[(3) - (5)].iVal) <= 255 &&
+                            (yyvsp[(4) - (5)].iVal) >= 0 && (yyvsp[(4) - (5)].iVal) <= 255) {
+                            set_color((yyvsp[(2) - (5)].iVal),(yyvsp[(3) - (5)].iVal),(yyvsp[(4) - (5)].iVal));
+                        } else {
+                            yyerror("INVALID COLOR!");
+                        }
+                    ;}
     break;
 
   case 10:
-#line 45 "zoomjoystrong.y"
+#line 105 "zoomjoystrong.y"
     {finish();;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1382 "zoomjoystrong.tab.c"
+#line 1427 "zoomjoystrong.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1592,17 +1637,28 @@ yyreturn:
 }
 
 
-#line 50 "zoomjoystrong.y"
+#line 108 "zoomjoystrong.y"
 
 
+// Epilogue
+
+
+/***********************************************************************
+    Error reporting function for parsing or syntax errors within the 
+    language.
+    @param const char msg message of the error to be reported from
+    grammar definitions.
+    @return int the total number of characters to be written to the 
+    stream.
+ **********************************************************************/
 int yyerror(const char* msg) {
-	return fprintf(stderr, "YACC: %s\n", msg);
+    return fprintf(stderr, "Error: %s Line %d\n", msg, yylineno);
 }
 
 int main(int argc, char** argv){
-  setup();
-  yyparse();
-  return 0;
+    setup();
+    yyparse();
+    return 0;
 }
 
 

@@ -166,7 +166,20 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
 
-    #define YY_LESS_LINENO(n)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex. 
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                yy_size_t yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -371,11 +384,11 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[49] =
     {   0,
-        0,    0,   13,   11,   10,   10,    8,    2,   11,   11,
-       11,   11,   11,   11,    0,    8,    0,    0,    0,    0,
-        0,    0,    9,    0,    1,    0,    0,    0,    0,    0,
-        4,    0,    0,    0,    0,    3,    0,    0,    5,    0,
-        0,    0,    0,    0,    0,    6,    7,    0
+        0,    0,   13,   11,   10,   10,    6,    9,   11,   11,
+       11,   11,   11,   11,    0,    6,    0,    0,    0,    0,
+        0,    0,    7,    0,    8,    0,    0,    0,    0,    0,
+        2,    0,    0,    0,    0,    1,    0,    0,    3,    0,
+        0,    0,    0,    0,    0,    4,    5,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -458,6 +471,11 @@ static yyconst flex_int16_t yy_chk[79] =
        48,   48,   48,   48,   48,   48,   48,   48
     } ;
 
+/* Table of booleans, true if rule could match eol. */
+static yyconst flex_int32_t yy_rule_can_match_eol[13] =
+    {   0,
+0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,     };
+
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
 
@@ -474,12 +492,21 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "zoomjoystrong.lex"
 #line 2 "zoomjoystrong.lex"
-  #include "zoomjoystrong.tab.h"
-  #include "zoomjoystrong.h"
-  #include <stdlib.h>
-  #include <stdio.h>
-  int yyerror(char*);
-#line 483 "lex.yy.c"
+/***********************************************************************
+    Zoomjoystrong Programming Language: Lexer
+
+    This is a lexer written in flex that defines the tokens for the
+    Zoomjoystrong language to pass to the parser for interpretation.
+    
+    @author Jay Van Dam
+    @version November 2021
+**********************************************************************/
+    #include "zoomjoystrong.tab.h"
+    #include "zoomjoystrong.h"
+    #include <stdlib.h>
+    #include <stdio.h>
+    int yyerror(char*);
+#line 510 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -661,10 +688,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 9 "zoomjoystrong.lex"
+#line 20 "zoomjoystrong.lex"
 
 
-#line 668 "lex.yy.c"
+#line 695 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -736,6 +763,16 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			yy_size_t yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					   
+    yylineno++;
+;
+			}
+
 do_action:	/* This label is used only to access EOF actions. */
 
 		switch ( yy_act )
@@ -749,66 +786,66 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 11 "zoomjoystrong.lex"
-{ return END;           }
+#line 22 "zoomjoystrong.lex"
+{ return POINT;                             }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 12 "zoomjoystrong.lex"
-{ return END_STATEMENT; }
+#line 23 "zoomjoystrong.lex"
+{ return LINE;                              }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 13 "zoomjoystrong.lex"
-{ return POINT;         }
+#line 24 "zoomjoystrong.lex"
+{ return CIRCLE;                            }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 14 "zoomjoystrong.lex"
-{ return LINE;          }
+#line 25 "zoomjoystrong.lex"
+{ return RECTANGLE;                         }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 15 "zoomjoystrong.lex"
-{ return CIRCLE;        }
+#line 26 "zoomjoystrong.lex"
+{ return SET_COLOR;                         }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 16 "zoomjoystrong.lex"
-{ return RECTANGLE;     }
+#line 27 "zoomjoystrong.lex"
+{ yylval.iVal = atoi(yytext); return INT;   }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 17 "zoomjoystrong.lex"
-{ return SET_COLOR;     }
+#line 28 "zoomjoystrong.lex"
+{ yylval.fVal = atof(yytext); return FLOAT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 18 "zoomjoystrong.lex"
-{ yylval.iVal = atoi(yytext); return INT;   }
+#line 29 "zoomjoystrong.lex"
+{ return END;                               }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 19 "zoomjoystrong.lex"
-{ yylval.fVal = atof(yytext); return FLOAT; }
+#line 30 "zoomjoystrong.lex"
+{ return END_STATEMENT;                     }
 	YY_BREAK
 case 10:
 /* rule 10 can match eol */
 YY_RULE_SETUP
-#line 20 "zoomjoystrong.lex"
+#line 31 "zoomjoystrong.lex"
 ;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 21 "zoomjoystrong.lex"
-{ yyerror("INVALID INPUT.");               }
+#line 32 "zoomjoystrong.lex"
+{ yyerror("INVALID INPUT.");                }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 23 "zoomjoystrong.lex"
+#line 34 "zoomjoystrong.lex"
 ECHO;
 	YY_BREAK
-#line 812 "lex.yy.c"
+#line 849 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1169,6 +1206,10 @@ static int yy_get_next_buffer (void)
 
 	*--yy_cp = (char) c;
 
+    if ( c == '\n' ){
+        --yylineno;
+    }
+
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
 	(yy_c_buf_p) = yy_cp;
@@ -1243,6 +1284,11 @@ static int yy_get_next_buffer (void)
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		   
+    yylineno++;
+;
 
 	return c;
 }
@@ -1713,6 +1759,9 @@ static int yy_init_globals (void)
      * This function is called from yylex_destroy(), so don't allocate here.
      */
 
+    /* We do not touch yylineno unless the option is enabled. */
+    yylineno =  1;
+    
     (yy_buffer_stack) = 0;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -1805,7 +1854,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 23 "zoomjoystrong.lex"
+#line 34 "zoomjoystrong.lex"
 
 
 

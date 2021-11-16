@@ -66,11 +66,11 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "zoomjoystrong.y"
-{
-	int iVal;
-  float fVal;
-	char* sVal;
+#line 25 "zoomjoystrong.y"
+{ // %union define lexeme types passed from lexer to parser
+    int iVal;
+    float fVal;
+    char* sVal;
 }
 /* Line 1529 of yacc.c.  */
 #line 77 "zoomjoystrong.tab.h"

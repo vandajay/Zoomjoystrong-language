@@ -4,7 +4,7 @@ rectangle 2 2 1021 765;
 
 set_color 0 101 164;
 circle 512 384 50;
-circle 512 384 100;
+circle 512 384 190;
 circle 512 384 150;
 circle 512 384 200;
 circle 512 384 250;
