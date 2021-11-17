@@ -12,7 +12,7 @@
     #include "zoomjoystrong.h"
     #include <stdlib.h>
     #include <stdio.h>
-    int yyerror(char*);
+    int yyerror(const char*);
 %}
 
 %option yylineno
